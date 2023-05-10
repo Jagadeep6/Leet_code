@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct ListNode 
+struct ListNode
 {
     int val;
     ListNode *next;
@@ -10,14 +10,14 @@ struct ListNode
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
-ListNode* revers_list(ListNode* head)
+ListNode *revers_list(ListNode *head)
 {
-    ListNode* prev = NULL;
-    ListNode* cur = head;
-    while(cur != NULL)
+    ListNode *prev = NULL;
+    ListNode *cur = head;
+    while (cur != NULL)
     {
-        ListNode* forward = cur->next;
-        cur -> next = prev;
+        ListNode *forward = cur->next;
+        cur->next = prev;
         prev = cur;
         cur = forward;
     }
@@ -30,20 +30,18 @@ int main()
     cin >> n;
     int x;
     cin >> x;
-    ListNode* head = new ListNode(x);
-    ListNode* temp = head;
-    for(int i = 1; i < n; i++)
+    ListNode *head = new ListNode(x);
+    ListNode *temp = head;
+    for (int i = 1; i < n; i++)
     {
         cin >> x;
-        temp -> next = new ListNode(x);
-        temp = temp-> next;
+        temp->next = new ListNode(x);
+        temp = temp->next;
     }
     temp = head;
     while (temp != NULL)
     {
-        cout << temp -> val << "->";
-        temp = temp -> next;
+        cout << temp->val << "->";
+        temp = temp->next;
     }
-
-
 }
