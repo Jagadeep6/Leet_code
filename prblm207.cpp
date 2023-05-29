@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool canFinish(int numCourses, vector<vector<int>> &prerequisites)
+/*bool canFinish(int numCourses, vector<vector<int>> &prerequisites)
 {
     int m = prerequisites.size();
     vector<vector<int>>adj_list(numCourses);
@@ -43,4 +43,59 @@ bool dfs(vector<vector<int>> &adj_list, unordered_set<int> &vis, int course)
     adj_list[course].clear();
     vis.erase(course);
     return true;
+}*/
+
+bool canFinish(int numCourses, vector<vector<int>> &prerequisites)
+{
+    unordered_map<int, list<int>> adj;
+    for(int i = 0; i < prerequisites.size(); i++)
+    {
+        adj[prerequisites[i][0]].push_back(prerequisites[i][1]);
+    }
+    vector<int> inDegree(numCourses);
+    for(auto i : adj)
+    {
+        for(auto j : i.second)
+        {
+            inDegree[j]++;
+        }
+    }
+    queue<int> q;
+    for(int i =0; i < numCourses; i++)
+    {
+        if(inDegree[i]==0)
+        {
+            q.push(i);
+        }
+    }
+
+    vector<int> ans;
+    while(!q.empty())
+    {
+        int temp = q.front();
+        q.pop();
+        ans.push_back(temp);
+        for(auto i :adj[temp])
+        {
+            inDegree[i]--;
+            if(inDegree[i]==0)
+            {
+                q.push(i);
+            }
+        }
+    }
+
+    if(ans.size() == numCourses)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+int main()
+{
+    return 0;
 }
