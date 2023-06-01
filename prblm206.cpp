@@ -12,14 +12,15 @@ struct ListNode
 
 ListNode *revers_list(ListNode *head)
 {
-    ListNode *prev = NULL;
-    ListNode *cur = head;
-    while (cur != NULL)
+    ListNode* cur = head;
+    ListNode* prev = NULL;
+
+    while(cur != NULL)
     {
-        ListNode *forward = cur->next;
+        ListNode* upnext = cur->next;
         cur->next = prev;
         prev = cur;
-        cur = forward;
+        cur = upnext;
     }
     return prev;
 }
