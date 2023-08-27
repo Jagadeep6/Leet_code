@@ -12,18 +12,17 @@ struct ListNode
 
 class comp
 {
-public:
-    bool operator()(const ListNode *a, const ListNode *b)
+    public:
+    bool operator()(const ListNode* a, const ListNode* b)
     {
         return a->val > b->val;
     }
 };
-
 ListNode *mergeKLists(vector<ListNode *> &lists)
 {
     ListNode *head = new ListNode(0);
-    ListNode *temp = head;
-    priority_queue<ListNode *, vector<ListNode *>, comp> heap;
+    ListNode* temp = head;
+    priority_queue<ListNode*, vector<ListNode*>, comp> heap;
     for(int i = 0; i < lists.size(); i++)
     {
         if(lists[i] != NULL)
@@ -34,12 +33,13 @@ ListNode *mergeKLists(vector<ListNode *> &lists)
 
     while(!heap.empty())
     {
-        auto min = heap.top();
-        temp->next = min;
+        ListNode* cur = heap.top();
+        heap.pop();
+        temp->next = cur;
         temp = temp->next;
-        if(min->next)
+        if(cur->next)
         {
-            heap.push(min->next);
+            heap.push(cur->next);
         }
     }
 

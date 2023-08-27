@@ -1,14 +1,14 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void solve(vector<vector<int>> &isConnected, vector<bool> &vis, int start)
+void solve(vector<vector<int>> &matrix, int i, vector<bool> &vis)
 {
-    vis[start] = true;
-    for (int i = 0; i < isConnected.size(); i++)
+    vis[i] = true;
+    for(int j = 0; j < matrix.size();j++)
     {
-        if (!vis[i] and isConnected[start][i] == 1)
+        if(!vis[j] and matrix[i][j] == 1)
         {
-            solve(isConnected, vis, i);
+            solve(matrix, j, vis);
         }
     }
 }
@@ -17,12 +17,12 @@ int findCircleNum(vector<vector<int>> &isConnected)
 {
     vector<bool> vis(isConnected.size(), false);
     int res = 0;
-    for (int i = 0; i < isConnected.size(); i++)
+    for(int i = 0; i < vis.size(); i++)
     {
         if(!vis[i])
         {
+            solve(isConnected, i, vis);
             res++;
-            solve(isConnected, vis, i);
         }
     }
     return res;

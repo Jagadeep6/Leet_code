@@ -1,20 +1,27 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void nextpemutation(vector<int> nums)
+void nextPermutation(vector<int> &nums)
 {
-    int n = nums.size(), k, l;
-    for(int i = n- 2; k >= 0; k--)
+    int n = nums.size(), ind = -1;
+    for(int i = n-2; i >= 0; i--)
     {
-        if(nums[k] , nums[k+1])
+        if(nums[i] < nums[i+1])
         {
+            ind = i;
             break;
         }
     }
-    if(k < 0)
+
+    for(int i = n-1; i >= ind and ind != -1; i--)
     {
-        reverse(nums.begin(), nums.end());
+        if(nums[i] > nums[ind])
+        {
+            swap(nums[i], nums[ind]);
+            break;
+        }
     }
+    reverse(nums.begin() +ind+1, nums.end());
 }
 
 int main()
